@@ -1,0 +1,47 @@
+# before running either cell conlfuence code you need this. it essentially makes the h5 files in a nice and useable way. 
+#this becomes the input to the next stage
+
+
+import os
+import h5py
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Path to the folder containing HDF5 files
+folder_path = r"C:\Users\felix\Documents\confluence_measure\output_photos"
+
+# Output directory for saving images
+output_dir = r"C:\Users\felix\Documents\confluence_measure\output_confluence_calculator"
+
+# Create the output directory if it doesn't exist
+os.makedirs(output_dir, exist_ok=True)
+
+# Iterate over each file in the folder
+for file_name in os.listdir(folder_path):
+    if file_name.endswith(".h5"):  # Check if the file is an HDF5 file
+        # Construct the full path to the HDF5 file
+        file_path = os.path.join(folder_path, file_name)
+        
+        # Open the HDF5 file
+        with h5py.File(file_path, 'r') as h5:
+            # Access the dataset
+            exported_data = h5['exported_data']  
+            
+            # Visualize the data (assuming it's an image)
+            plt.imshow(exported_data[:,:,:])  # Assuming it's an image with shape (3040, 4032, 3)
+            plt.axis('off')
+            
+            # Save the image to the output directory without displaying the title
+            output_path = os.path.join(output_dir, file_name.replace(".h5", ".png"))
+            plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
+            plt.close()  # Close the plot to prevent it from being displayed
+            
+            # Calculate the proportion of each color channel
+            red_proportion = np.mean(exported_data[:,:,0])
+            green_proportion = np.mean(exported_data[:,:,1])
+            blue_proportion = np.mean(exported_data[:,:,2])
+            percentage_colony = green_proportion / (green_proportion + red_proportion)
+            print("Red proportion:", red_proportion)
+            print("Green proportion:", green_proportion)
+            print("Blue proportion:", blue_proportion)
+            print("Cell colony presence:", percentage_colony)
