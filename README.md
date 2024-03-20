@@ -4,6 +4,9 @@ This project provides a method to estimate the area of cell colonies in bright f
 
 ## How to Run:
 
+step_1_annoying: run this first. it is just a way to convert the h5 files from the pixel classification output into a usable png format. 
+
+
 ### Jupyter Notebook Version:
 1. Open the notebook file in a Jupyter environment.
 2. Ensure that the input folder contains the original bright field images and their corresponding h5 files.
