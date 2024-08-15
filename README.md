@@ -1,6 +1,6 @@
 # Cell Colony Area Calculator
 
-This project provides a method to estimate the area of cell colonies in bright field images captured in 6 well plates. The process involves processing the original bright field images along with the corresponding h5 files generated after the modeling step.
+This project provides a method to estimate the area of cell colonies in bright field images captured in 6 well plates. The process involves processing the original bright field images along with the corresponding h5 files generated after the modeling step. This is very much a rugid approach to doing this. In an ideal world, a U-net approach would be better. Or even fine tuning models such as segment anything (SAM). However, this is my approach for now and it works pretty well.  
 
 ## How to Run:
 
